@@ -1,0 +1,42 @@
+PODS:
+  - Alamofire (4.3.0)
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - Moya/Core (8.0.0-beta.5):
+    - Alamofire (~> 4.0)
+    - Result (~> 3.0)
+  - Moya/RxSwift (8.0.0-beta.5):
+    - Moya/Core
+    - RxSwift (~> 3.0)
+  - Reachability (3.1.1)
+  - Result (3.1.0)
+  - RxSwift (3.2.0)
+
+DEPENDENCIES:
+  - JSQMessagesViewController
+  - Moya/RxSwift (= 8.0.0-beta.5)
+  - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
+
+EXTERNAL SOURCES:
+  Reachability:
+    :branch: frameworks
+    :git: https://github.com/ashfurrow/Reachability.git
+
+CHECKOUT OPTIONS:
+  Reachability:
+    :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
+    :git: https://github.com/ashfurrow/Reachability.git
+
+SPEC CHECKSUMS:
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  Moya: a3bbabe1e21a96066199a2dad874db1949510214
+  Reachability: 5b69def55ffa04d6f9425a6da1f47338b60557b2
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
+
+PODFILE CHECKSUM: 8f6bab37395a8933d312838b6713962ed27f5c7a
+
+COCOAPODS: 1.2.0
