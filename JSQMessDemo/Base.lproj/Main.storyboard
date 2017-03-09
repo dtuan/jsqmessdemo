@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Demo Chat View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="DemoChatViewController" customModule="JSQMessDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="JSQMessDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,11 +20,58 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jjk-oj-Sa4">
+                                <rect key="frame" x="0.0" y="20" width="375" height="519"/>
+                                <connections>
+                                    <segue destination="tOL-fK-GXF" kind="embed" identifier="chatController" id="Xaa-WA-FNw"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSj-XK-gIb" customClass="RepliesView" customModule="JSQMessDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="539" width="375" height="128"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="UML-qQ-drd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mSj-XK-gIb" firstAttribute="top" secondItem="Jjk-oj-Sa4" secondAttribute="bottom" id="5Mp-QK-3xS"/>
+                            <constraint firstItem="Jjk-oj-Sa4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7CA-oS-ldv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mSj-XK-gIb" secondAttribute="bottom" id="Mua-t3-nsf"/>
+                            <constraint firstAttribute="trailing" secondItem="mSj-XK-gIb" secondAttribute="trailing" id="Tx1-eg-Okp"/>
+                            <constraint firstItem="Jjk-oj-Sa4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ZFo-iI-1hT"/>
+                            <constraint firstAttribute="trailing" secondItem="Jjk-oj-Sa4" secondAttribute="trailing" id="gbj-M7-h4V"/>
+                            <constraint firstItem="mSj-XK-gIb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ziJ-Ro-dmY"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lcReplyViewHeight" destination="UML-qQ-drd" id="3HJ-AS-ezc"/>
+                        <outlet property="repliesView" destination="mSj-XK-gIb" id="V5Q-Ft-oQt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="53.600000000000001" y="79.610194902548727"/>
+        </scene>
+        <!--Demo Chat View Controller-->
+        <scene sceneID="Ey3-ZE-F9d">
+            <objects>
+                <viewController id="tOL-fK-GXF" customClass="DemoChatViewController" customModule="JSQMessDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="luG-nq-FhB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bpt-Rf-wlA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Ue-V2-zKe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="502-up-XN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="54" y="779"/>
         </scene>
     </scenes>
 </document>

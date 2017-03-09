@@ -10,5 +10,6 @@ target 'JSQMessDemo' do
     pod 'JSQMessagesViewController'
 	pod 'Moya/RxSwift', '= 8.0.0-beta.5'
 	pod 'Reachability', :git => 'https://github.com/ashfurrow/Reachability.git', :branch => 'frameworks'
-
+	pod 'SwiftSoup'
+	pod 'Kingfisher', '~> 3.0'
 end
