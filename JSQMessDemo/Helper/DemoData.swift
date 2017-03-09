@@ -19,8 +19,7 @@ let kUserSenderDisplayName = "User"
 let KUserSenderId = "222"
 
 protocol DemoDataDelegate : class {
-    func data(_ data: DemoData, didReceiveMessages messages:[JSQMessage])
-    func data(_ data: DemoData, didReceiveReplies replies:[String])
+    func data(_ data: DemoData, didReceiveMessages messages:[JSQMessage], replies: [String]?)
     func data(_ data: DemoData, didUpdateMediaMessage message: JSQMessage)
 }
 
@@ -268,11 +267,7 @@ class DemoData {
         messages.append(contentsOf: jsqMsgs)
         
         if let delegate = self.delegate {
-            delegate.data(self, didReceiveMessages: jsqMsgs)
-        }
-        
-        if let replies = replies, let delegate = self.delegate {
-            delegate.data(self, didReceiveReplies: replies)
+            delegate.data(self, didReceiveMessages: jsqMsgs, replies: replies)
         }
     }
     

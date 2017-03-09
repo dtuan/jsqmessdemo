@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jjk-oj-Sa4">
-                                <rect key="frame" x="0.0" y="20" width="375" height="519"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <connections>
                                     <segue destination="tOL-fK-GXF" kind="embed" identifier="chatController" id="Xaa-WA-FNw"/>
                                 </connections>
@@ -37,8 +37,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mSj-XK-gIb" firstAttribute="top" secondItem="Jjk-oj-Sa4" secondAttribute="bottom" id="5Mp-QK-3xS"/>
                             <constraint firstItem="Jjk-oj-Sa4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7CA-oS-ldv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Jjk-oj-Sa4" secondAttribute="bottom" id="CYi-ba-Rkr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mSj-XK-gIb" secondAttribute="bottom" id="Mua-t3-nsf"/>
                             <constraint firstAttribute="trailing" secondItem="mSj-XK-gIb" secondAttribute="trailing" id="Tx1-eg-Okp"/>
                             <constraint firstItem="Jjk-oj-Sa4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ZFo-iI-1hT"/>
@@ -64,7 +64,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Bpt-Rf-wlA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4Ue-V2-zKe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

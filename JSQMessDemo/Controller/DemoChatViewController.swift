@@ -12,7 +12,7 @@ import JSQMessagesViewController
 import Moya
 
 protocol DemoChatViewControllerDelegate: class {
-    func chatController(_ controller: DemoChatViewController, didReceiveReplies replies: [String])
+    func chatController(_ controller: DemoChatViewController, didReceiveReplies replies: [String]?)
 }
 
 class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
@@ -21,8 +21,13 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
     let messageData = DemoData()
     
+    // Override from parent
+    var toolbarBottomLayoutGuide: NSLayoutConstraint!
+    
     var outgoingBubbleImageData: JSQMessagesBubbleImage!
     var incomingBubbleImageData: JSQMessagesBubbleImage!
+    
+    fileprivate var storeReplies: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +52,40 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
         
         self.inputToolbar.contentView.textView.text = "動画" //"返品したい" //"画像" //"支払い方法について"
         self.inputToolbar.toggleSendButtonEnabled()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(DemoChatViewController.keyboardDidHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // Override super private method
+    func jsq_setToolbarBottomLayoutGuideConstant(constant: CGFloat) {
+        toolbarBottomLayoutGuide.constant = constant
+        self.view.setNeedsUpdateConstraints()
+        self.view.layoutIfNeeded()
+        self.jsq_updateCollectionViewInsets()
+    }
+    
+    
+    func jsq_updateCollectionViewInsets() {
+        self.jsq_setCollectionViewInsetsTopValue(top: self.topLayoutGuide.length + self.topContentAdditionalInset, bottomValue: self.collectionView.frame.maxY - self.inputToolbar.frame.minY)
+    }
+    
+    func jsq_setCollectionViewInsetsTopValue(top: CGFloat, bottomValue bottom: CGFloat) {
+        let insets = UIEdgeInsetsMake(top, 0, bottom, 0)
+        self.collectionView.contentInset = insets
+        self.collectionView.scrollIndicatorInsets = insets
+        
+    }
+    // END of override
     
     func didSelectReply(text: String) {
         if let message = JSQMessage(senderId: KUserSenderId, senderDisplayName: kUserSenderDisplayName, date: Date.distantPast, text: text) {
@@ -65,6 +98,9 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         if let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text) {
+            // Forward event to clear replies
+            chatDelegate?.chatController(self, didReceiveReplies: nil)
+            
             self.messageData.addAndSendMessage(message)
             self.finishSendingMessage(animated: true)
         }
@@ -155,14 +191,25 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
 }
 
 extension DemoChatViewController : DemoDataDelegate {
-    func data(_ data: DemoData, didReceiveMessages messages: [JSQMessage]) {
-        self.finishReceivingMessage(animated: true)
+    
+    @objc func keyboardDidHide(notification: NSNotification) {
+        // Forward event
+        chatDelegate?.chatController(self, didReceiveReplies: storeReplies)
     }
     
-    func data(_ data: DemoData, didReceiveReplies replies: [String]) {
-        print("### receive replies: \(replies)")
-        // Forward event
-        chatDelegate?.chatController(self, didReceiveReplies: replies)
+    func data(_ data: DemoData, didReceiveMessages messages: [JSQMessage], replies: [String]?) {
+        self.storeReplies = replies
+        
+        if replies != nil {
+            self.inputToolbar.contentView.textView.resignFirstResponder()
+            // Wait keyboard hide to start show replies
+            if !keyboardController.keyboardIsVisible {
+                chatDelegate?.chatController(self, didReceiveReplies: storeReplies)
+            }
+        }
+        else {
+            self.finishReceivingMessage(animated: true)
+        }
     }
     
     func data(_ data: DemoData, didUpdateMediaMessage message: JSQMessage) {

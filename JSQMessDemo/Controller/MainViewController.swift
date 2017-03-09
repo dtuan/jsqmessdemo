@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JSQMessagesViewController
 
 class MainViewController: UIViewController {
 
@@ -14,15 +15,23 @@ class MainViewController: UIViewController {
     @IBOutlet weak var repliesView: RepliesView!
     
     fileprivate var chatVC: DemoChatViewController!
+    fileprivate var isKeyboardVisible: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.keyboardWillChangeFrame(notification:)), name: NSNotification.Name(rawValue: JSQMessagesKeyboardControllerNotificationKeyboardDidChangeFrame), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     // MARK: - Navigation
@@ -36,15 +45,24 @@ class MainViewController: UIViewController {
             self.chatVC.chatDelegate = self
         }
     }
-
-    // test
-    @IBAction func changeConstraintTapped(_ sender: Any) {
-        lcReplyViewHeight.constant = lcReplyViewHeight.constant < 50 ? 260 : 40
+    
+    private func initView() {
+        repliesView.delegate = self
+        repliesView.isHidden = true
+        isKeyboardVisible = false
     }
     
-    func initView() {
-        lcReplyViewHeight.constant = 0
-        repliesView.delegate = self
+    @objc private func keyboardWillChangeFrame(notification: Notification) {
+        if isKeyboardVisible == chatVC.keyboardController.keyboardIsVisible {
+            return
+        }
+        
+        isKeyboardVisible = chatVC.keyboardController.keyboardIsVisible
+        
+        repliesView.isHidden = isKeyboardVisible
+        if !repliesView.isHidden && lcReplyViewHeight.constant != 0 {
+            chatVC.jsq_setToolbarBottomLayoutGuideConstant(constant: lcReplyViewHeight.constant)
+        }
     }
 }
 
@@ -57,12 +75,16 @@ extension MainViewController: RepliesViewDelegate {
     
     func repliesView(_ repliesView: RepliesView, didUpdateContentSize size: CGSize) {
         lcReplyViewHeight.constant = size.height
-        chatVC.view.layoutIfNeeded()
+        repliesView.isHidden = (size.height == 0)
+        if !isKeyboardVisible {
+            chatVC.jsq_setToolbarBottomLayoutGuideConstant(constant: lcReplyViewHeight.constant)
+            chatVC.finishReceivingMessage()
+        }
     }
 }
 
 extension MainViewController : DemoChatViewControllerDelegate {
-    func chatController(_ controller: DemoChatViewController, didReceiveReplies replies: [String]) {
+    func chatController(_ controller: DemoChatViewController, didReceiveReplies replies: [String]?) {
         // This will cause replies collection view reload data
         repliesView.replies = replies
     }
