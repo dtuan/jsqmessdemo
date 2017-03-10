@@ -265,7 +265,6 @@ class DemoData {
         }
         
         messages.append(contentsOf: jsqMsgs)
-        
         if let delegate = self.delegate {
             delegate.data(self, didReceiveMessages: jsqMsgs, replies: replies)
         }

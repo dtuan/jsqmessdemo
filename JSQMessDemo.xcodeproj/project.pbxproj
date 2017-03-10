@@ -25,6 +25,8 @@
 		9EBCAEB81E53FCD200F347C3 /* RepliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBCAEB71E53FCD200F347C3 /* RepliesView.swift */; };
 		9EBCAEBC1E553AA000F347C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBCAEBB1E553AA000F347C3 /* MainViewController.swift */; };
 		9EC159541E6C7FCA0022A076 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC159531E6C7FCA0022A076 /* Message.swift */; };
+		9EDD03D51E72851100BA1458 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDD03D41E72851000BA1458 /* Global.swift */; };
+		9EF720B61E71560000BF0ADB /* TextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF720B51E71560000BF0ADB /* TextHelper.swift */; };
 		BE0496194364B547203424C9 /* Pods_JSQMessDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBEBF7D8DF1678515E360DD /* Pods_JSQMessDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		9EBCAEB71E53FCD200F347C3 /* RepliesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepliesView.swift; sourceTree = "<group>"; };
 		9EBCAEBB1E553AA000F347C3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9EC159531E6C7FCA0022A076 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		9EDD03D41E72851000BA1458 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		9EF720B51E71560000BF0ADB /* TextHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHelper.swift; sourceTree = "<group>"; };
 		AEBEBF7D8DF1678515E360DD /* Pods_JSQMessDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSQMessDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A3D3F4B776CB4B8EFB18A7 /* Pods-JSQMessDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessDemo/Pods-JSQMessDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +108,8 @@
 				9EBCAEB31E53EBEF00F347C3 /* DemoData.swift */,
 				9E1508B61E6FB142006DAC80 /* AsyncPhotoMediaItem.swift */,
 				9E1508BA1E6FEAA6006DAC80 /* AsyncVideoMediaItem.swift */,
+				9EF720B51E71560000BF0ADB /* TextHelper.swift */,
+				9EDD03D41E72851000BA1458 /* Global.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -307,7 +313,9 @@
 				9EBCAEBC1E553AA000F347C3 /* MainViewController.swift in Sources */,
 				9E1508B71E6FB142006DAC80 /* AsyncPhotoMediaItem.swift in Sources */,
 				9E00A82B1E4D907B0082B6F6 /* DemoChatViewController.swift in Sources */,
+				9EF720B61E71560000BF0ADB /* TextHelper.swift in Sources */,
 				9EBCAEB81E53FCD200F347C3 /* RepliesView.swift in Sources */,
+				9EDD03D51E72851100BA1458 /* Global.swift in Sources */,
 				9E28B1AC1E51A75D0011D49B /* Networking.swift in Sources */,
 				9EC159541E6C7FCA0022A076 /* Message.swift in Sources */,
 				9E28B1AE1E51A75D0011D49B /* Observable+Operators.swift in Sources */,

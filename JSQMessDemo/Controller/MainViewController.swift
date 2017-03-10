@@ -48,6 +48,7 @@ class MainViewController: UIViewController {
     
     private func initView() {
         repliesView.delegate = self
+        repliesView.maxHeight = 250
         repliesView.isHidden = true
         isKeyboardVisible = false
     }
