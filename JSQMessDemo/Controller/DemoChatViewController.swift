@@ -50,15 +50,21 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
         // Remove accessory button
         self.inputToolbar.contentView.leftBarButtonItem = nil
         
-        self.inputToolbar.contentView.textView.text = "動画" //"返品したい" //"画像" //"支払い方法について"
+        self.inputToolbar.contentView.textView.text = ""//"支払い方法は何があるの？" //"支払い方法について" //"動画" //"返品したい" //"画像" //"支払い方法について"
         self.inputToolbar.toggleSendButtonEnabled()
         
         NotificationCenter.default.addObserver(self, selector: #selector(DemoChatViewController.keyboardDidHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "videoSegue" {
+            let vc = segue.destination as! VideoViewController
+            vc.url = sender as! String
+            vc.delegate = self
+        } else if segue.identifier == "imageSegue" {
+            let vc = segue.destination as! ImageViewController
+            vc.imageUrl = sender as! URL
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,6 +112,27 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
         }
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        let jsqMessage = messageData[indexPath.item]
+        if let videoItem = jsqMessage.media as? AsyncVideoMediaItem {
+            performSegue(withIdentifier: "videoSegue", sender: videoItem.videoURL.absoluteString)
+        } else if let locationItem = jsqMessage.media as? LocationMediaItem {
+            let regionDistance:CLLocationDistance = 3000
+            let coordinates = locationItem.coordinate
+            let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+            let options = [
+                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+            ]
+            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = "\(locationItem.name!)"
+            mapItem.openInMaps(launchOptions: options)
+        } else if let imageItem = jsqMessage.media as? AsyncPhotoMediaItem {
+            performSegue(withIdentifier: "imageSegue", sender: imageItem.imageURL)
+        }
+    }
+    
     ////////////////////////////////////////////////////////////////////////////////
     // MARK: - JSQMessagesCollectionViewDataSource
     
@@ -126,11 +153,12 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let message = self.messageData[indexPath.item]
-        if message.senderId == self.senderId {
-            return nil
+        let message = messageData[indexPath.item]
+        if message.senderId != senderId {
+            return messageData.getRebotAvatar()
         }
-        return self.messageData.avatars[message.senderId]
+        
+        return nil
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
@@ -190,6 +218,25 @@ class DemoChatViewController: JSQMessagesViewController, UIActionSheetDelegate {
     }
 }
 
+extension DemoChatViewController {
+    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            let msg = jsq_currentlyComposedMessageText()
+            if msg.characters.count > 0 {
+                didPressSend(inputToolbar.contentView.rightBarButtonItem, withMessageText: msg, senderId: senderId, senderDisplayName: senderDisplayName, date: Date())
+            }
+            return false
+        }
+        return true
+    }
+    
+    func jsq_currentlyComposedMessageText() -> String {
+        inputToolbar.contentView.textView.inputDelegate?.selectionWillChange(inputToolbar.contentView.textView)
+        inputToolbar.contentView.textView.inputDelegate?.selectionDidChange(inputToolbar.contentView.textView)
+        return inputToolbar.contentView.textView.text.jsq_stringByTrimingWhitespace()
+    }
+}
+
 extension DemoChatViewController : DemoDataDelegate {
     
     @objc func keyboardDidHide(notification: NSNotification) {
@@ -217,5 +264,8 @@ extension DemoChatViewController : DemoDataDelegate {
     }
 }
 
-
+extension DemoChatViewController: CommonControllerDelegate {
+    func viewController(didClose viewController: UIViewController) {
+    }
+}
 

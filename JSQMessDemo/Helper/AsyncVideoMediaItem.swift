@@ -12,6 +12,7 @@ import Kingfisher
 
 class AsyncVideoMediaItem: JSQVideoMediaItem {
     var asyncImageView: UIImageView!
+    var videoURL: URL!
     
     override init!(maskAsOutgoing: Bool) {
         super.init(maskAsOutgoing: maskAsOutgoing)
@@ -19,6 +20,8 @@ class AsyncVideoMediaItem: JSQVideoMediaItem {
     
     init(withURL url: URL, thumbnailURL thumbnailUrl: URL, isOperator: Bool) {
         super.init()
+        self.videoURL = url
+        
         appliesMediaViewMaskAsOutgoing = (isOperator == false)
         
         let size = super.mediaViewDisplaySize()
@@ -54,11 +57,12 @@ class AsyncVideoMediaItem: JSQVideoMediaItem {
             } else {
                 KingfisherManager.shared.downloader.downloadImage(with: thumbnailUrl , progressBlock: nil) { (image, error, imageURL, originalData) -> () in
                     
-                    if let image = image {
+                    if let image = image,
+                        let imageURL = imageURL {
                         self.asyncImageView.image = image
                         activityIndicator?.removeFromSuperview()
                         addPlayIcon()
-                        KingfisherManager.shared.cache.store(image, forKey: thumbnailUrl.absoluteString)
+                        KingfisherManager.shared.cache.store(image, forKey: imageURL.absoluteString)
                     }
                 }
             }

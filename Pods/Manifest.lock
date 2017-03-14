@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (4.3.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -16,6 +21,9 @@ PODS:
   - SwiftSoup (1.2.0)
 
 DEPENDENCIES:
+  - AlamofireImage (~> 3.1)
+  - Crashlytics
+  - Fabric
   - JSQMessagesViewController
   - Kingfisher (~> 3.0)
   - Moya/RxSwift (= 8.0.0-beta.5)
@@ -34,6 +42,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Kingfisher: 12eeffeef42ea45b68c5e5acfe8ba9005b713ab4
@@ -43,6 +54,6 @@ SPEC CHECKSUMS:
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   SwiftSoup: 1ac190457246df2d0d53fedf349dd2651e2b2858
 
-PODFILE CHECKSUM: 8c0a1c72f7fd2c65522cadbebb2a56d5d48a7eff
+PODFILE CHECKSUM: 8a953fb5f87b9d4cd171328b8b8a27580a84b36d
 
 COCOAPODS: 1.2.0

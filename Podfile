@@ -12,4 +12,9 @@ target 'JSQMessDemo' do
 	pod 'Reachability', :git => 'https://github.com/ashfurrow/Reachability.git', :branch => 'frameworks'
 	pod 'SwiftSoup'
 	pod 'Kingfisher', '~> 3.0'
+    pod 'AlamofireImage', '~> 3.1'
+    
+    # Delevery build
+    pod 'Fabric'
+    pod 'Crashlytics'
 end

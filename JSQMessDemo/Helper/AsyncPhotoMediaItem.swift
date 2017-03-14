@@ -12,6 +12,7 @@ import Kingfisher
 
 class AsyncPhotoMediaItem: JSQPhotoMediaItem {
     var asyncImageView: UIImageView!
+    var imageURL: URL!
     
     override init!(maskAsOutgoing: Bool) {
         super.init(maskAsOutgoing: maskAsOutgoing)
@@ -19,6 +20,8 @@ class AsyncPhotoMediaItem: JSQPhotoMediaItem {
     
     init(withURL url: URL, imageSize: CGSize, isOperator: Bool) {
         super.init()
+        imageURL = url
+        
         appliesMediaViewMaskAsOutgoing = (isOperator == false)
         
         var size = imageSize
@@ -44,14 +47,13 @@ class AsyncPhotoMediaItem: JSQPhotoMediaItem {
                 self.asyncImageView.image = image
                 activityIndicator?.removeFromSuperview()
             } else {
-                
-                
                 KingfisherManager.shared.downloader.downloadImage(with: url , progressBlock: nil) { (image, error, imageURL, originalData) -> () in
                     
-                    if let image = image {
+                    if let image = image,
+                        let imageURL = imageURL {
                         self.asyncImageView.image = image
                         activityIndicator?.removeFromSuperview()
-                        KingfisherManager.shared.cache.store(image, forKey: url.absoluteString)
+                        KingfisherManager.shared.cache.store(image, forKey: imageURL.absoluteString)
                     }
                 }
             }

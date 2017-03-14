@@ -11,12 +11,17 @@ import CoreLocation
 import JSQMessagesViewController
 import Moya
 import SwiftSoup
+import Kingfisher
 
 let kRebotSenderDisplayName = "Rebot"
 let kRebotSenderId = "111"
 
 let kUserSenderDisplayName = "User"
 let KUserSenderId = "222"
+
+let kRebotAvatarUrl = "https://s3-ap-northeast-1.amazonaws.com/rebot-line-resized/1/9e07e28595784c6f9d0ed34c30b8128f.png/origin"
+
+let kLineBreak = "__LINE_BREAK__"
 
 protocol DemoDataDelegate : class {
     func data(_ data: DemoData, didReceiveMessages messages:[JSQMessage], replies: [String]?)
@@ -25,7 +30,6 @@ protocol DemoDataDelegate : class {
 
 class DemoData {
     
-    var avatars: [String: JSQMessagesAvatarImage]!
     var users: [String: String]!
     
     public weak var delegate: DemoDataDelegate?
@@ -39,12 +43,18 @@ class DemoData {
     private let provider = Networking.newDefaultNetworking()
     
     private var messages = [JSQMessage]()
-
+    
+    private var defaultAvatar: JSQMessagesAvatarImage!
+    private var rebotAvatar: JSQMessagesAvatarImage?
+    private var isDownloadingRebotAvatar = false
+    
     init() {
-        let botImage = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named:"character_01.png"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))!
-        self.avatars = [kRebotSenderId: botImage]
-        self.users = [kRebotSenderId : kRebotSenderDisplayName,
-            KUserSenderId : kUserSenderDisplayName]
+        defaultAvatar = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named:"avatar-placeholder.png"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        
+        users = [kRebotSenderId : kRebotSenderDisplayName,
+                      KUserSenderId : kUserSenderDisplayName]
+        
+        downloadRebotAvatarImage()
     }
     
     public var count : Int {
@@ -76,6 +86,45 @@ class DemoData {
         self.messages.remove(at: index)
     }
     
+    public func getRebotAvatar() -> JSQMessagesAvatarImage! {
+        if let avatar = rebotAvatar {
+            return avatar
+        }
+        
+        if !isDownloadingRebotAvatar {
+            downloadRebotAvatarImage()
+        }
+        
+        return defaultAvatar
+    }
+    
+    private func downloadRebotAvatarImage() {
+        let setAvatarImage: (UIImage) -> (Void) = { image in
+            let avatar = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+            self.rebotAvatar = avatar
+        }
+        
+        KingfisherManager.shared.cache.retrieveImage(forKey: kRebotAvatarUrl, options: nil) { (image, cacheType) -> () in
+            
+            if let image = image {
+                setAvatarImage(image)
+            } else {
+                self.isDownloadingRebotAvatar = true
+                
+                let url = URL(string: kRebotAvatarUrl)!
+                KingfisherManager.shared.downloader.downloadImage(with: url , progressBlock: nil) { (image, error, imageURL, originalData) -> () in
+                    self.isDownloadingRebotAvatar = false
+                    
+                    if let image = image,
+                        let imageURL = imageURL {
+                        setAvatarImage(image)
+                        KingfisherManager.shared.cache.store(image, forKey: imageURL.absoluteString)
+                    }
+                }
+            }
+        }
+    }
+    
     ///////////////////////////////////////////////////////////////////////////////////////
     // Connect server
     public func sendMessage(_ message: JSQMessage) {
@@ -90,10 +139,11 @@ class DemoData {
                 
                 
                 if let resd = response as? Dictionary<String, Any> {
-                   print("===================== response\n\(resd)")
-                   if let texts = resd["response"] as? [String] {
+                    print("===================== response\n\(resd)")
+                    if let texts = resd["response"] as? [String] {
                         for text in texts {
-                            let eles = try! self.processHtmlContent(html: text)
+                            let modifiedText = text.replacingOccurrences(of: "\n", with: kLineBreak)
+                            let eles = try! self.processHtmlContent(html: modifiedText)
                             if let eles = eles {
                                 responseContent.append(eles)
                             }
@@ -207,26 +257,31 @@ class DemoData {
                     let children = ele.children().array()
                     for child in children {
                         let tagName = child.tagName()
+                        var text = try! child.text()
+                        if text.characters.count > 0 {
+                            text = text.replacingOccurrences(of: kLineBreak, with: "\n")
+                        }
+                        
                         switch tagName {
                         case "text":
-                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date.distantPast, text: try! child.text())
+                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date(), text: text)
                             jsqMsgs.append(message!)
                             
                         case "a":
                             let href = try! child.attr("href")
-                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date.distantPast, text: href)
+                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date(), text: href)
                             jsqMsgs.append(message!)
                             
                         case "map":
-                            //let text = try! child.text()
                             let lat = CLLocationDegrees(try! child.attr("lat"))
                             let lon = CLLocationDegrees(try! child.attr("lon"))
                             let loc = CLLocation(latitude: lat!, longitude: lon!)
-                            let item = JSQLocationMediaItem()
+                            let item = LocationMediaItem()
+                            item.name = text
                             item.appliesMediaViewMaskAsOutgoing = false
                             
-                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date.distantPast, media: item)
-                            item.setLocation(loc, withCompletionHandler: { 
+                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date(), media: item)
+                            item.setLocation(loc, withCompletionHandler: {
                                 self.delegate?.data(self, didUpdateMediaMessage: message!)
                             })
                             jsqMsgs.append(message!)
@@ -238,10 +293,9 @@ class DemoData {
                 case "imgs":
                     for node in ele.children().array() {
                         let linkHref: String = try! node.attr("src")
-                        //init(withURL url: URL, imageSize: CGSize, isOperator: Bool)
                         if let url = URL(string:linkHref) {
                             let item = AsyncPhotoMediaItem(withURL: url, imageSize: CGSize.zero, isOperator: true)
-                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date.distantPast, media: item)
+                            let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date(), media: item)
                             jsqMsgs.append(message!)
                         }
                     }
@@ -250,9 +304,10 @@ class DemoData {
                 case "video":
                     let linkHref: String = try! ele.attr("src")
                     if let url = URL(string: linkHref),
-                       let thumbnail = getImageThumbnailUrl(linkHref) {
+                        let thumbnail = getImageThumbnailUrl(linkHref) {
                         let item = AsyncVideoMediaItem(withURL: url, thumbnailURL: thumbnail, isOperator: true)
-                        let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date.distantPast, media: item)
+                        
+                        let message = JSQMessage(senderId: kRebotSenderId, senderDisplayName: kRebotSenderDisplayName, date: Date(), media: item)
                         jsqMsgs.append(message!)
                     }
                     break

@@ -20,19 +20,22 @@
 		9E28B1AC1E51A75D0011D49B /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28B1A71E51A75D0011D49B /* Networking.swift */; };
 		9E28B1AD1E51A75D0011D49B /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28B1A81E51A75D0011D49B /* NetworkLogger.swift */; };
 		9E28B1AE1E51A75D0011D49B /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E28B1A91E51A75D0011D49B /* Observable+Operators.swift */; };
-		9E3FAFF91E6F922E0013BE07 /* character_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3FAFF81E6F922E0013BE07 /* character_01.png */; };
 		9EBCAEB41E53EBEF00F347C3 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBCAEB31E53EBEF00F347C3 /* DemoData.swift */; };
 		9EBCAEB81E53FCD200F347C3 /* RepliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBCAEB71E53FCD200F347C3 /* RepliesView.swift */; };
 		9EBCAEBC1E553AA000F347C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBCAEBB1E553AA000F347C3 /* MainViewController.swift */; };
 		9EC159541E6C7FCA0022A076 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC159531E6C7FCA0022A076 /* Message.swift */; };
 		9EDD03D51E72851100BA1458 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDD03D41E72851000BA1458 /* Global.swift */; };
+		9EE2E1DC1E76729D00C640AE /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2E1DB1E76729D00C640AE /* VideoViewController.swift */; };
+		9EE2E1DE1E76761600C640AE /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2E1DD1E76761600C640AE /* CommonViewController.swift */; };
+		9EE2E1E01E767E6600C640AE /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2E1DF1E767E6600C640AE /* ImageViewController.swift */; };
+		9EE2E1E21E76854300C640AE /* LocationMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2E1E11E76854300C640AE /* LocationMediaItem.swift */; };
 		9EF720B61E71560000BF0ADB /* TextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF720B51E71560000BF0ADB /* TextHelper.swift */; };
 		BE0496194364B547203424C9 /* Pods_JSQMessDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEBEBF7D8DF1678515E360DD /* Pods_JSQMessDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4EC01C3CE14C6FCC54687D99 /* Pods-JSQMessDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessDemo/Pods-JSQMessDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		9E00A8251E4D907B0082B6F6 /* JSQMessDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSQMessDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E00A8251E4D907B0082B6F6 /* ChatUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E00A8281E4D907B0082B6F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E00A82A1E4D907B0082B6F6 /* DemoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoChatViewController.swift; sourceTree = "<group>"; };
 		9E00A82D1E4D907B0082B6F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,12 +50,15 @@
 		9E28B1A71E51A75D0011D49B /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		9E28B1A81E51A75D0011D49B /* NetworkLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
 		9E28B1A91E51A75D0011D49B /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
-		9E3FAFF81E6F922E0013BE07 /* character_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = character_01.png; path = JSQMessDemo/Resources/character_01.png; sourceTree = SOURCE_ROOT; };
 		9EBCAEB31E53EBEF00F347C3 /* DemoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
 		9EBCAEB71E53FCD200F347C3 /* RepliesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepliesView.swift; sourceTree = "<group>"; };
 		9EBCAEBB1E553AA000F347C3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9EC159531E6C7FCA0022A076 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9EDD03D41E72851000BA1458 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		9EE2E1DB1E76729D00C640AE /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		9EE2E1DD1E76761600C640AE /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
+		9EE2E1DF1E767E6600C640AE /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		9EE2E1E11E76854300C640AE /* LocationMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationMediaItem.swift; sourceTree = "<group>"; };
 		9EF720B51E71560000BF0ADB /* TextHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHelper.swift; sourceTree = "<group>"; };
 		AEBEBF7D8DF1678515E360DD /* Pods_JSQMessDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSQMessDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A3D3F4B776CB4B8EFB18A7 /* Pods-JSQMessDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessDemo/Pods-JSQMessDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,7 +90,7 @@
 		9E00A8261E4D907B0082B6F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E00A8251E4D907B0082B6F6 /* JSQMessDemo.app */,
+				9E00A8251E4D907B0082B6F6 /* ChatUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +114,7 @@
 				9EBCAEB31E53EBEF00F347C3 /* DemoData.swift */,
 				9E1508B61E6FB142006DAC80 /* AsyncPhotoMediaItem.swift */,
 				9E1508BA1E6FEAA6006DAC80 /* AsyncVideoMediaItem.swift */,
+				9EE2E1E11E76854300C640AE /* LocationMediaItem.swift */,
 				9EF720B51E71560000BF0ADB /* TextHelper.swift */,
 				9EDD03D41E72851000BA1458 /* Global.swift */,
 			);
@@ -129,7 +136,6 @@
 		9EC1594F1E6C63580022A076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9E3FAFF81E6F922E0013BE07 /* character_01.png */,
 				9E00A82F1E4D907B0082B6F6 /* Assets.xcassets */,
 				9E00A8341E4D907B0082B6F6 /* Info.plist */,
 			);
@@ -150,8 +156,11 @@
 			isa = PBXGroup;
 			children = (
 				9E00A8281E4D907B0082B6F6 /* AppDelegate.swift */,
+				9EE2E1DD1E76761600C640AE /* CommonViewController.swift */,
 				9EBCAEBB1E553AA000F347C3 /* MainViewController.swift */,
 				9E00A82A1E4D907B0082B6F6 /* DemoChatViewController.swift */,
+				9EE2E1DB1E76729D00C640AE /* VideoViewController.swift */,
+				9EE2E1DF1E767E6600C640AE /* ImageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -195,6 +204,7 @@
 				9E00A8231E4D907B0082B6F6 /* Resources */,
 				D5846240911CB80D0AA8929D /* [CP] Embed Pods Frameworks */,
 				EC784C87B5AC838D0AAC6121 /* [CP] Copy Pods Resources */,
+				9EE2E1E31E7691E100C640AE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -202,7 +212,7 @@
 			);
 			name = JSQMessDemo;
 			productName = JSQMessDemo;
-			productReference = 9E00A8251E4D907B0082B6F6 /* JSQMessDemo.app */;
+			productReference = 9E00A8251E4D907B0082B6F6 /* ChatUI.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -245,7 +255,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E3FAFF91E6F922E0013BE07 /* character_01.png in Resources */,
 				9E00A8331E4D907B0082B6F6 /* LaunchScreen.storyboard in Resources */,
 				9E00A8301E4D907B0082B6F6 /* Assets.xcassets in Resources */,
 				9E00A82E1E4D907B0082B6F6 /* Main.storyboard in Resources */,
@@ -269,6 +278,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		9EE2E1E31E7691E100C640AE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" d21770ca433bed515ec3ca6d071a202b5e8215e1 5ccc9eb8134c2e3178c12a303b0a1831549ec51577303805544d74ccfd8c84c7";
 		};
 		D5846240911CB80D0AA8929D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -309,14 +331,18 @@
 			files = (
 				9E1508BB1E6FEAA6006DAC80 /* AsyncVideoMediaItem.swift in Sources */,
 				9EBCAEB41E53EBEF00F347C3 /* DemoData.swift in Sources */,
+				9EE2E1E21E76854300C640AE /* LocationMediaItem.swift in Sources */,
 				9E28B1AD1E51A75D0011D49B /* NetworkLogger.swift in Sources */,
 				9EBCAEBC1E553AA000F347C3 /* MainViewController.swift in Sources */,
 				9E1508B71E6FB142006DAC80 /* AsyncPhotoMediaItem.swift in Sources */,
+				9EE2E1DE1E76761600C640AE /* CommonViewController.swift in Sources */,
 				9E00A82B1E4D907B0082B6F6 /* DemoChatViewController.swift in Sources */,
 				9EF720B61E71560000BF0ADB /* TextHelper.swift in Sources */,
 				9EBCAEB81E53FCD200F347C3 /* RepliesView.swift in Sources */,
 				9EDD03D51E72851100BA1458 /* Global.swift in Sources */,
+				9EE2E1E01E767E6600C640AE /* ImageViewController.swift in Sources */,
 				9E28B1AC1E51A75D0011D49B /* Networking.swift in Sources */,
+				9EE2E1DC1E76729D00C640AE /* VideoViewController.swift in Sources */,
 				9EC159541E6C7FCA0022A076 /* Message.swift in Sources */,
 				9E28B1AE1E51A75D0011D49B /* Observable+Operators.swift in Sources */,
 				9E28B1AA1E51A75D0011D49B /* Logger.swift in Sources */,
@@ -450,8 +476,8 @@
 				DEVELOPMENT_TEAM = 4N4SYYC73T;
 				INFOPLIST_FILE = JSQMessDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = resola.ai.JSQMessDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = resola.ai.demo.chatui;
+				PRODUCT_NAME = ChatUI;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -464,8 +490,8 @@
 				DEVELOPMENT_TEAM = 4N4SYYC73T;
 				INFOPLIST_FILE = JSQMessDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = resola.ai.JSQMessDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = resola.ai.demo.chatui;
+				PRODUCT_NAME = ChatUI;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
